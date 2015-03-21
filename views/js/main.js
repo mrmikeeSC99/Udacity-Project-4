@@ -450,10 +450,12 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    // cache querySelctorALL method as rdmPizzaCntr to only call method once - Mike Cone 2.2.1
+    var rdmPizzaCntr = document.querySelectorAll(".randomPizzaContainer");
+    for (var i = 0; i < rdmPizzaCntr.length; i++) {
+      var dx = determineDx(rdmPizzaCntr[i], size);
+      var newwidth = (rdmPizzaCntr[i].offsetWidth + dx) + 'px';
+      rdmPizzaCntr[i].style.width = newwidth;
     }
   }
 
@@ -469,8 +471,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+// moved pizzasDiv var lookup outside of loop to only call it once. Mike Cone 2.2.2
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -503,6 +506,7 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+  // cached scrollTop method so it's called only once - Mike Cone 2.1
   var scrllTp = (document.body.scrollTop / 1250);
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin(scrllTp + (i % 5));
