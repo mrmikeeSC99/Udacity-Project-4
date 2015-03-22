@@ -13,7 +13,10 @@ Website Optimization
 
 ####Part 1 - Optimizing index.html
 
-Installed Grunt and Grunt Plugins to minify css, js, and html.
+I installed Grunt and Grunt Plugins to minify css, js, and html.
+
+If you already have installed Grunt on your system, these can be run by calling:
+```grunt watch``` which will look for any file changes to the files configured in ```Gruntfile.js``` and grunt will then minify, lint, or minify automatically.
 
 Google Optimized files
 
