@@ -452,9 +452,11 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     // cache querySelctorALL method as rdmPizzaCntr to only call method once - Mike Cone 2.2.1
     var rdmPizzaCntr = document.querySelectorAll(".randomPizzaContainer");
+    // All Pizzas are the same size so only call determineDx once. Mike Cone 2.3.1
+    var dx = determineDx(rdmPizzaCntr[0], size);
+    // calculate variable newwidth only once. Mike Cone 2.3.1
+    var newwidth = (rdmPizzaCntr[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < rdmPizzaCntr.length; i++) {
-      var dx = determineDx(rdmPizzaCntr[i], size);
-      var newwidth = (rdmPizzaCntr[i].offsetWidth + dx) + 'px';
       rdmPizzaCntr[i].style.width = newwidth;
     }
   }

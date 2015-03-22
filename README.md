@@ -74,9 +74,37 @@ Moved offending calcuation out of for loop so calculation only needed to be run 
 ```
 
 
+2.3.1 Pizza resize Slider changes
+
+```js
+ // Iterates through pizza elements on the page and changes their widths
+  function changePizzaSizes(size) {
+    // cache querySelctorALL method as rdmPizzaCntr to only call method once - Mike Cone 2.2.1
+    var rdmPizzaCntr = document.querySelectorAll(".randomPizzaContainer");
+    // All Pizzas are the same size so only call determineDx once.
+    var dx = determineDx(rdmPizzaCntr[0], size);
+    // calculate variable newwidth only once
+    var newwidth = (rdmPizzaCntr[0].offsetWidth + dx) + 'px';
+    for (var i = 0; i < rdmPizzaCntr.length; i++) {
+      rdmPizzaCntr[i].style.width = newwidth;
+    }
+  }
+
+```
+
 --
 #Results
 
-This results in pizza reloads of 2.5ms and 0.5ms on scrolling.
+###Scrolling
+
+The results in pizza SCROLLING reloads of 2.5ms and 0.5ms on scrolling.
 
 ![screenshot of console](./reload_times.png)
+
+--
+
+###Pizza Resize Slider
+
+The results in pizza SLIDER change, reloads 0.9ms
+
+![screenshot of console 2](./reload_times2.png)
